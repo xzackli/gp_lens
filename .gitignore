@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# slurm outputs
+slurm-*.out
+
 # C extensions
 *.so
 
