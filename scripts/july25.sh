@@ -1,0 +1,3 @@
+sbatch run_noisy_Peaks_low.sh
+sbatch run_noisy_Peaks_med.sh
+sbatch run_noisy_Peaks_high.sh
