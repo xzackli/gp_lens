@@ -1,10 +1,10 @@
 #!/bin/bash
 
-#SBATCH -t 1:00:00
+#SBATCH -t 6:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --ntasks-per-node=40
-#SBATCH -J gp                                    # job name
+#SBATCH -J gp-ng40-PS                                    # job name
 #SBATCH --mem=32G                                # memory in GB
 
 # sends mail when process begins, and
@@ -15,5 +15,5 @@
 
 module load anaconda3 intel intel-mkl
 export OMP_NUM_THREADS=40
-python -u gp.py -o /tigress/zequnl/gp_chains/5z_PS_${SLURM_JOB_ID}.dat \
-  -d PS --datascale 1e-9 -binmin 300 -binmax 5000 -mn KN -cn KN
+python -u gp.py -o /tigress/zequnl/gp_chains/ng40_PS_${SLURM_JOB_ID}.dat \
+  -d PS -binmin 300 -binmax 5000 -mn KN -cn KN --binscale log -z 10_ng40

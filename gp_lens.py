@@ -1,4 +1,5 @@
 """Compute likelihoods using Gaussian Processes."""
+<<<<<<< HEAD
 import numpy as np
 from scipy.stats import sem as sem
 from sklearn.gaussian_process import GaussianProcessRegressor
@@ -6,6 +7,9 @@ from sklearn.gaussian_process.kernels import RBF, ConstantKernel as C
 from astropy.table import Table
 
 import config
+=======
+
+>>>>>>> bcb9c6bcb47921b26ac9418a654eadfb8848b144
 
 class Observable:
     """Base class for fitting GP and computing likelihoods."""
@@ -18,6 +22,7 @@ class Observable:
         """Return a list of realizations for a particular model."""
         raise NotImplementedError("You need to implement the realizations function!")
 
+<<<<<<< HEAD
     def fit(self, X=None, real_list=None):
         """Fit a Gaussian Process using the realizations function provided."""
         gp_list = []
@@ -198,3 +203,16 @@ class LensingPSorPeaks(Observable):
         real_arr = (real_arr.T[filter_for_bins]).T
         
         return bin_centers, real_arr
+=======
+    def fit(self):
+        pass
+
+    def compute_cov(self):
+        pass
+
+    def likelihood(parameter_input):
+        pass
+
+    def __call__(self, parameter_input):
+        return self.likelihood(parameter_input)
+>>>>>>> bcb9c6bcb47921b26ac9418a654eadfb8848b144
