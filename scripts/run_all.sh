@@ -1,0 +1,11 @@
+sbatch Peaks_10.sh
+sbatch Peaks_11.sh
+sbatch Peaks_5.sh
+sbatch Peaks_6.sh
+sbatch Peaks_7.sh
+sbatch Peaks_8.sh
+sbatch Peaks_9.sh
+sbatch PS_1.sh
+sbatch PS_2.sh
+sbatch PS_3.sh
+sbatch PS_4.sh
