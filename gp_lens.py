@@ -18,7 +18,7 @@ class Observable:
         """Return a list of realizations for a particular model."""
         raise NotImplementedError("You need to implement the realizations function!")
 
-    def fit(self, X=None, real_list=None):
+    def fit(self, X=None, real_list=None, kernel=None):
         """Fit a Gaussian Process using the realizations function provided."""
         gp_list = []
         datascale = []  # normalize each bin so mean is 1
@@ -39,8 +39,11 @@ class Observable:
             datascale.append(np.mean(y))
             y /= datascale[-1]
             dy /= datascale[-1]
-
-            kernel = C(5.0, (1e-4, 1e4)) * RBF([3, 0.3, 5], (1e-4, 1e4))
+            
+            # generate a default kernel if appropriate
+            if kernel is None:
+                kernel = C(5.0, (1e-4, 1e4)) * RBF([3, 0.3, 5], (1e-4, 1e4))
+                
             gp = GaussianProcessRegressor(kernel=kernel,
                                           alpha=(dy)**2,
                                           n_restarts_optimizer=50,
