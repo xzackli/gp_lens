@@ -15,5 +15,6 @@
 
 module load anaconda3 intel intel-mkl
 export OMP_NUM_THREADS=20
-python -u /home/zequnl/jia/gp_lens/run_gp.py -o /tigress/zequnl/gp_chains/Peaks_7_${SLURM_JOB_ID}.dat \
+cd /home/zequnl/jia/gp_lens/
+python -u run_gp.py -o /tigress/zequnl/gp_chains/Peaks_7_${SLURM_JOB_ID}.dat \
   -d Peaks -binmin -0.05 -binmax 100 -cn KN -s 5.00

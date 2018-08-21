@@ -15,5 +15,6 @@
 
 module load anaconda3 intel intel-mkl
 export OMP_NUM_THREADS=20
-python -u /home/zequnl/jia/gp_lens/run_gp.py -o /tigress/zequnl/gp_chains/PS_1_${SLURM_JOB_ID}.dat \
+cd /home/zequnl/jia/gp_lens/
+python -u run_gp.py -o /tigress/zequnl/gp_chains/PS_1_${SLURM_JOB_ID}.dat \
   -d PS -binmin 300 -binmax 2000 -cn KN --binscale log
