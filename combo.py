@@ -38,7 +38,15 @@ class LensingPS_AND_Peaks(gp_lens.LensingPSorPeaks):
         x_ps, y_ps = powerspec.get_realizations(model_index, covariance, verbose)
         
         return np.hstack([x_ps, x_peaks]), np.hstack([y_ps, y_peaks])
+
     
+# set up some constants for prior evaluation
+m_nu_min = 0.06  # minimum from oscillation experiments
+m_nu_max = 2*np.max(combo.table['M_nu(eV)'])
+om_m_min = np.min(combo.table['Omega_m'])
+om_m_max = 2*np.max(combo.table['Omega_m'])
+A_s_min = np.min(combo.table['10^9*A_s'])
+A_s_max = 2*np.max(combo.table['10^9*A_s'])
 
 # define emcee function calls, prior, likelihood,
 def lnprior(theta):
