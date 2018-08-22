@@ -49,7 +49,7 @@ lens_obs = gp_lens.LensingPSorPeaks(args.binmin,args.binmax,
                                     args.cov_noise, 
                                     redshifts=args.redshift, 
                                     observable_name=args.data, 
-                                    bin_center_row=0, 
+                                    bin_center_row=args.bin_center_row, 
                                     binscale=args.binscale, 
                                     smoothing=args.smoothing_scale )
 x, y = lens_obs.get_realizations(model_index=1, verbose=True)

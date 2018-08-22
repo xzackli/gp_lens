@@ -2,6 +2,8 @@
 __pycache__/
 *.py[cod]
 *$py.class
+chains/*
+combo.out
 
 # slurm outputs
 slurm-*.out
