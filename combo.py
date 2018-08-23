@@ -39,7 +39,31 @@ class LensingPS_AND_Peaks(gp_lens.LensingPSorPeaks):
         
         return np.hstack([x_ps, x_peaks]), np.hstack([y_ps, y_peaks])
 
-    
+
+combo = LensingPS_AND_Peaks()
+x, y = combo.get_realizations(model_index=1, verbose=True)
+combo.fid = np.mean(y,axis=0)
+
+index_list = np.arange(len(peaks.params.T))
+index_list = np.delete(index_list, 0)
+index_list = np.delete(index_list, 0)
+
+modified_y = [combo.get_realizations(i) for i in index_list]
+modified_X = (combo.params.T[index_list]).T
+
+combo.fit(X=modified_X, real_list=modified_y)
+
+test_model = 1
+x, y = combo.get_realizations(model_index=1, verbose=True)
+y_true = np.mean(y, axis=0)
+
+
+ys, sigs = combo.GP(combo.params.T[1])
+invcov = combo.compute_cov(0)
+cov = np.linalg.inv(invcov)
+
+
+
 # set up some constants for prior evaluation
 m_nu_min = 0.06  # minimum from oscillation experiments
 m_nu_max = 2*np.max(combo.table['M_nu(eV)'])
@@ -72,28 +96,6 @@ def lnprob(theta):
     return lp + lnlike(theta)
 
     
-combo = LensingPS_AND_Peaks()
-x, y = combo.get_realizations(model_index=1, verbose=True)
-combo.fid = np.mean(y,axis=0)
-
-index_list = np.arange(len(peaks.params.T))
-index_list = np.delete(index_list, 0)
-index_list = np.delete(index_list, 0)
-
-modified_y = [combo.get_realizations(i) for i in index_list]
-modified_X = (combo.params.T[index_list]).T
-
-combo.fit(X=modified_X, real_list=modified_y)
-
-test_model = 1
-x, y = combo.get_realizations(model_index=1, verbose=True)
-y_true = np.mean(y, axis=0)
-
-
-ys, sigs = combo.GP(combo.params.T[1])
-invcov = combo.compute_cov(0)
-cov = np.linalg.inv(invcov)
-
 
 
 
