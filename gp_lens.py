@@ -120,10 +120,14 @@ class LensingPSorPeaks(Observable):
                                 self.table['Omega_m'],
                                 self.table['10^9*A_s']])
         
-    def compute_cov(self, model_index, verbose=False):
+    def compute_cov(self, model_index, verbose=False, covariance=True, max_realizations=None):
         """Compute covariance using the realizations function provided."""
-        bin_centers, realizations_stacked = self.get_realizations(model_index=0, covariance=True, verbose=verbose)
+        bin_centers, realizations_stacked = self.get_realizations(model_index=0, covariance=covariance, verbose=verbose)
 #         realizations_stacked = np.hstack(real_arr)
+        
+        if max_realizations is not None:
+            realizations_stacked = realizations_stacked[:min(max_realizations,realizations_stacked.shape[0]), :]
+
         print(realizations_stacked.shape)
         # now compute covariance
         cov = np.cov(realizations_stacked.T)
@@ -151,6 +155,9 @@ class LensingPSorPeaks(Observable):
                                              bin_min=self.kappa_min, bin_max=self.kappa_max, verbose=verbose)
             xlist.append(x)
             ylist.append(y)
+        
+        if verbose:
+            print( [len(xx) for xx in xlist] )
         
         return np.hstack(xlist), np.hstack(ylist) 
     
